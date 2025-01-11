@@ -1,13 +1,30 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import Scoreboard from "../Scoreboard";
-import PlayerComparison from "../PlayerComparison";
+import React, { useEffect, useState } from "react";
+import { Image, StyleSheet, View, ImageBackground } from "react-native";
 import OutcomeButtons from "../OutcomeButtons";
+import PlayerComparison from "../PlayerComparison";
+import Scoreboard from "../Scoreboard";
 import UserScore from "../UserScore";
-
+import { mockPlays } from "@/data/mockPlays";
+import LivePlay from "../LivePlay";
+import { Play } from "@/types/Plays";
 type Props = {};
 
 const Game = (props: Props) => {
+  const [currentPlay, setCurrentPlay] = useState<Play>(mockPlays[0]);
+  const [playIndex, setPlayIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPlayIndex((prevIndex) => {
+        const nextIndex = (prevIndex + 1) % mockPlays.length;
+        setCurrentPlay(mockPlays[nextIndex]);
+        return nextIndex;
+      });
+    }, 10000); // Change play every 10 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
+
   return (
     <View style={styles.main}>
       <View>
@@ -18,11 +35,13 @@ const Game = (props: Props) => {
           score={70}
         />
         <View>
-          <Image
+          <ImageBackground
             source={require("@/assets/images/metsstadium.jpeg")}
             resizeMode="stretch"
             style={{ height: 250, width: "auto" }}
-          />
+          >
+            <LivePlay play={currentPlay} />
+          </ImageBackground>
         </View>
       </View>
       <View>

@@ -1,0 +1,47 @@
+{
+  "pointSystem": {
+    "out": {
+      "basePoints": 5,
+      "types": {
+        "strikeout": 10,
+        "flyout": 8,
+        "groundout": 8,
+        "linedriveOut": 12,
+        "popout": 8,
+        "fielderChoice": 6,
+        "doublePlay": 15,
+        "triplePlay": 25
+      }
+    },
+    "hit": {
+      "basePoints": 10,
+      "types": {
+        "single": 12,
+        "double": 15,
+        "triple": 20,
+        "homeRun": 25,
+        "insideTheParkHomeRun": 30
+      }
+    },
+    "walk": {
+      "basePoints": 8
+    },
+    "otherEvents": {
+      "hitByPitch": 10,
+      "sacrificeFly": 7,
+      "sacrificeBunt": 6,
+      "error": 5
+    },
+    "bonusPoints": {
+      "consecutiveCorrectPredictions": {
+        "3": 5,
+        "5": 15,
+        "10": 50
+      },
+      "streaks": {
+        "longestDailyStreak": 20,
+        "weeklyStreak": 50
+      }
+    }
+  }
+}
