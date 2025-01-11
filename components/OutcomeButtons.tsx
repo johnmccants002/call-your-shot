@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 const OutcomeButtons: React.FC = () => {
-  const [selectedOutcome, setSelectedOutcome] = useState<string | null>(null);
+  const [selectedOutcome, setSelectedOutcome] = useState<string | null>("Out");
 
   const outcomes: Record<string, string[]> = {
     Out: ["Flyout", "Popout", "Groundout", "Strikeout"],
