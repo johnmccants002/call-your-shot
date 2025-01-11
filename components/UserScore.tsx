@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ImageSourcePropType,
 } from "react-native";
+import Ticker from "./Ticker";
 
 interface UserScoreProps {
   profilePicture: string; // URL of the user's profile picture
@@ -20,19 +21,26 @@ const UserScore: React.FC<UserScoreProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      {/* Profile Picture */}
-      <View style={styles.imageContainer}>
-        <Image
-          source={{ uri: profilePicture }}
-          resizeMode="cover"
-          style={styles.profileImage}
-        />
+      <View style={styles.container}>
+        {/* Profile Picture */}
+        <View style={styles.imageContainer}>
+          <Image
+            source={{ uri: profilePicture }}
+            resizeMode="cover"
+            style={styles.profileImage}
+          />
+        </View>
+
+        {/* Username and Score */}
+        <View style={styles.infoContainer}>
+          <Text style={styles.username}>{username}</Text>
+        </View>
       </View>
 
-      {/* Username and Score */}
-      <View style={styles.infoContainer}>
-        <Text style={styles.username}>{username}</Text>
-        <Text style={styles.score}>Score: {score}</Text>
+      <View>
+        <Text style={styles.score}>Score: </Text>
+
+        <Ticker value={score} />
       </View>
     </View>
   );
@@ -50,6 +58,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
     elevation: 2,
+    justifyContent: "space-between",
   },
   imageContainer: {
     width: 40,
@@ -73,6 +82,7 @@ const styles = StyleSheet.create({
   score: {
     color: "#FFF",
     fontSize: 14,
+    alignSelf: "center",
   },
 });
 

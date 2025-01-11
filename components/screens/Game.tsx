@@ -9,9 +9,12 @@ import LivePlay from "../LivePlay";
 import { Play } from "@/types/Plays";
 type Props = {};
 
+const scores = [30, 45, 85];
+
 const Game = (props: Props) => {
   const [currentPlay, setCurrentPlay] = useState<Play>(mockPlays[0]);
   const [playIndex, setPlayIndex] = useState(0);
+  const [score, setScore] = useState(scores[0]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,6 +22,11 @@ const Game = (props: Props) => {
         const nextIndex = (prevIndex + 1) % mockPlays.length;
         setCurrentPlay(mockPlays[nextIndex]);
         return nextIndex;
+      });
+      // Increment the score by a random number divisible by 5
+      setScore((prevScore) => {
+        const randomIncrement = Math.ceil(Math.random() * 10) * 5; // Random increment (5, 10, ..., 50)
+        return prevScore + randomIncrement; // Ensure it's always greater than the previous score
       });
     }, 10000); // Change play every 10 seconds
 
@@ -32,7 +40,7 @@ const Game = (props: Props) => {
         <UserScore
           profilePicture="https://i.imgur.com/hCwHtRc.png"
           username="JohnMcCants"
-          score={70}
+          score={score}
         />
         <View>
           <ImageBackground
